@@ -15,11 +15,11 @@ const upload = multer({ storage });
 
 /**
  * 📌 Report a new issue (with optional photo upload)
- * Accepts: category, description, address, contact, photos[]
+ * Accepts: category, description, address, contact, latitude, longitude, photos[]
  */
 router.post('/', authMiddleware, upload.array('photos', 5), async (req, res) => {
   try {
-    const { category, description, address, contact } = req.body;
+    const { category, description, address, contact, latitude, longitude } = req.body; // New: Get latitude and longitude
     const photos = req.files.map(file => `/uploads/${file.filename}`);
 
     const issue = new Issue({
@@ -28,7 +28,11 @@ router.post('/', authMiddleware, upload.array('photos', 5), async (req, res) => 
       reporterId: req.user.id,
       address,
       contact,
-      photos
+      photos,
+      location: { // New: Add the location object
+        latitude: parseFloat(latitude), // Convert to a number
+        longitude: parseFloat(longitude), // Convert to a number
+      },
     });
 
     await issue.save();
