@@ -25,6 +25,7 @@ const Home = () => {
     <div className="min-h-screen flex flex-col font-sans">
       <Header />
 
+      {/* Hero Section */}
       <section className="relative flex-1 h-[90vh] overflow-hidden">
         {heroImages.map((img, i) => (
           <img
@@ -54,6 +55,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-2xl p-8 w-full max-w-sm text-center shadow-xl">
@@ -62,7 +64,7 @@ const Home = () => {
             <div className="flex justify-around mb-4">
               <button
                 onClick={() => navigate('/register')}
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition"
+                className="bg-[#124E66] hover:brightness-110 text-white px-4 py-2 rounded-lg transition"
               >
                 Register
               </button>
@@ -83,6 +85,7 @@ const Home = () => {
         </div>
       )}
 
+      {/* About Section */}
       <section id="about" className="bg-white py-20 px-6 text-center">
         <h3 className="text-4xl font-semibold mb-6 text-[#124E66]">About CivicTrack</h3>
         <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
@@ -91,6 +94,7 @@ const Home = () => {
         </p>
       </section>
 
+      {/* Features Section */}
       <section id="features" className="bg-gray-100 py-20 px-6 text-center">
         <h3 className="text-4xl font-semibold mb-10 text-[#124E66]">Key Features</h3>
         <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -107,8 +111,23 @@ const Home = () => {
               title: "Volunteer Portal",
               desc: "Get involved and help resolve local problems.",
             },
+            {
+              title: "Data Insights",
+              desc: "Analyze reports with charts and stats for better decisions.",
+            },
+            {
+              title: "Community Engagement",
+              desc: "Collaborate with neighbors and share updates on issues.",
+            },
+            {
+              title: "Authority Dashboard",
+              desc: "Authorities can manage, prioritize, and resolve complaints efficiently.",
+            },
           ].map(({ title, desc }) => (
-            <div key={title} className="bg-white p-6 rounded-2xl shadow-xl hover:scale-105 transform transition duration-300">
+            <div
+              key={title}
+              className="bg-white p-6 rounded-2xl shadow-xl hover:scale-105 transform transition duration-300"
+            >
               <h4 className="text-2xl font-semibold mb-2 text-[#124E66]">{title}</h4>
               <p className="text-gray-600 text-md">{desc}</p>
             </div>
@@ -116,6 +135,40 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section id="testimonials" className="bg-white py-20 px-6 text-center">
+        <h3 className="text-4xl font-semibold mb-10 text-[#124E66]">What People Say</h3>
+        <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-8 max-w-6xl mx-auto">
+          {[
+            {
+              text: "I reported a pothole in my area and CivicTrack helped authorities take quick action. Really useful app!",
+              author: "Ramesh, Hyderabad",
+              role: "General User",
+            },
+            {
+              text: "I volunteered to assist in cleaning drives, and CivicTrack connected me with the right people. Great initiative!",
+              author: "Priya, Bangalore",
+              role: "Volunteer",
+            },
+            {
+              text: "CivicTrack simplified how we monitor public complaints and respond faster.",
+              author: "GHMC Officer",
+              role: "Authority",
+            },
+          ].map(({ text, author, role }, i) => (
+            <div
+              key={i}
+              className="bg-gray-100 p-6 rounded-2xl shadow-md hover:shadow-lg transition"
+            >
+              <p className="italic mb-4">“{text}”</p>
+              <h4 className="font-semibold">{author}</h4>
+              <span className="text-sm text-gray-500">{role}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
       <section id="contact" className="bg-white py-20 px-6 text-center">
         <h3 className="text-4xl font-semibold mb-6 text-[#124E66]">Contact Us</h3>
         <form className="max-w-xl mx-auto space-y-6">
