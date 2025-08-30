@@ -36,17 +36,31 @@ function AppWrapper() {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login onLogin={handleLogin} />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/report" element={<ReportIssue />} />
-      <Route path="/dashboard/general" element={<GeneralDashboard />} />
-      <Route path="/dashboard/authority" element={<AuthorityDashboard />} />
-      <Route path="/dashboard/volunteer" element={<VolunteerDashboard />} />
-      <Route path="/my-issues" element={<MyIssues />} />
+    <div className="App">
+      {/* --- Your New Header --- */}
+      <header style={{ padding: '20px', backgroundColor: '#f0f0f0', textAlign: 'center' }}>
+        <h1>Fix My Town 🛠️</h1>
+        <p>Your voice matters. Report issues and help improve our community.</p>
+      </header>
 
-    </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/report" element={<ReportIssue />} />
+          <Route path="/dashboard/general" element={<GeneralDashboard />} />
+          <Route path="/dashboard/authority" element={<AuthorityDashboard />} />
+          <Route path="/dashboard/volunteer" element={<VolunteerDashboard />} />
+          <Route path="/my-issues" element={<MyIssues />} />
+        </Routes>
+      </main>
+
+      {/* --- Professional Footer --- */}
+      <footer style={{ padding: '10px', textAlign: 'center', marginTop: 'auto', backgroundColor: '#333', color: 'white' }}>
+        <p>&copy; 2025 Fix My Town. All rights reserved.</p>
+      </footer>
+    </div>
   );
 }
 
