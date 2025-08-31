@@ -1,3 +1,91 @@
+/* Modern Navigation Bar */
+.app-header {
+  padding: 1rem 2rem;
+  background-color: #2c3e50;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #e74c3c;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.register-btn {
+  padding: 0.5rem 1.5rem;
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+  background-color: white;
+  color: #2c3e50;
+}
+
+.login-btn {
+  padding: 0.5rem 1.5rem;
+  background-color: #e74c3c;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Professional Footer */
+.app-footer {
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+  background-color: #333;
+  color: white;
+}
+
+/* Keep the original App styles below */
 .App {
   text-align: center;
 }
@@ -13,7 +101,7 @@
   }
 }
 
-.App-header {
+.App-header-old {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;

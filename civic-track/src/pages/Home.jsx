@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import img1 from '../assets/pexels-jibarofoto-2339722.jpg';
 import img2 from '../assets/boy-girl-plastic-garbage-collection.jpg';
 import img3 from '../assets/pexels-tkirkgoz-11794520.jpg';
 import img4 from '../assets/blurred-nightlights-city.jpg';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const heroImages = [img1, img2, img3, img4];
@@ -23,8 +22,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative flex-1 h-[90vh] overflow-hidden">
         {heroImages.map((img, i) => (
@@ -160,7 +157,7 @@ const Home = () => {
               key={i}
               className="bg-gray-100 p-6 rounded-2xl shadow-md hover:shadow-lg transition"
             >
-              <p className="italic mb-4">“{text}”</p>
+              <p className="italic mb-4">"{text}"</p>
               <h4 className="font-semibold">{author}</h4>
               <span className="text-sm text-gray-500">{role}</span>
             </div>

@@ -14,7 +14,10 @@ const userRoutes = require('./routes/users');
 const volunteerRoutes = require('./routes/volunteers');
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Your frontend URL
+  credentials: true
+}));
 app.use(express.json());
 
 // Mount routes
