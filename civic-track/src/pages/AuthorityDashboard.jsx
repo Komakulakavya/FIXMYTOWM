@@ -7,6 +7,20 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+// Leaflet and React-Leaflet imports
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import L from 'leaflet';
+
+// Fix for default marker icon not showing
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+});
+
 const COLORS = ['#124E66', '#82ca9d', '#FFBB28', '#FF8042'];
 
 const AuthorityDashboard = () => {
@@ -92,10 +106,10 @@ const AuthorityDashboard = () => {
   const filteredIssues = issues.filter(issue => {
     const term = searchTerm.toLowerCase();
     return (
-      issue.title?.toLowerCase().includes(term) ||
-      issue.category?.toLowerCase().includes(term) ||
-      issue.status?.toLowerCase().includes(term) ||
-      issue.reporterId?.username?.toLowerCase().includes(term)
+      (issue.title && issue.title.toLowerCase().includes(term)) ||
+      (issue.category && issue.category.toLowerCase().includes(term)) ||
+      (issue.status && issue.status.toLowerCase().includes(term)) ||
+      (issue.reporterId?.username && issue.reporterId.username.toLowerCase().includes(term))
     );
   });
 
@@ -224,7 +238,7 @@ const AuthorityDashboard = () => {
         {/* Modal for Expanded Issue */}
         {selectedIssue && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full relative">
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full relative overflow-y-auto max-h-[90vh]">
               <button
                 className="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-xl font-bold"
                 onClick={() => setSelectedIssue(null)}
@@ -235,7 +249,32 @@ const AuthorityDashboard = () => {
                 {selectedIssue.title || 'No Title'}
               </h2>
               <p className="mb-2 text-gray-700">{selectedIssue.description}</p>
-              <p className="text-sm text-gray-600 mb-1">📍 Address: {selectedIssue.address}</p>
+              
+              {/* New: Map Section */}
+              {selectedIssue.location && (
+                <div className="mb-4">
+                  <p className="text-sm text-gray-500 mb-2">
+                    <strong>📍 Location:</strong>
+                  </p>
+                  <div className="h-64 w-full border border-gray-300 rounded-lg overflow-hidden">
+                    <MapContainer
+                      center={[selectedIssue.location.latitude, selectedIssue.location.longitude]}
+                      zoom={15}
+                      scrollWheelZoom={false}
+                      style={{ height: '100%', width: '100%' }}
+                    >
+                      <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                      <Marker position={[selectedIssue.location.latitude, selectedIssue.location.longitude]} />
+                    </MapContainer>
+                  </div>
+                </div>
+              )}
+              {/* End of new map section */}
+
+              <p className="text-sm text-gray-600 mb-1">🏠 Address: {selectedIssue.address}</p>
               <p className="text-sm text-gray-600 mb-1">📞 Contact: {selectedIssue.contact}</p>
               <p className="text-sm text-gray-600 mb-1">Status: <strong>{selectedIssue.status}</strong></p>
               <p className="text-sm text-gray-600 mb-1">Category: {selectedIssue.category}</p>
