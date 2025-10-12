@@ -22,10 +22,12 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Welcome, {userInfo.username}!</h2>
+      <p>joo</p>
       {/* Show other info if you have */}
     </div>
   );
 };
 
 export default Dashboard;
+
 
